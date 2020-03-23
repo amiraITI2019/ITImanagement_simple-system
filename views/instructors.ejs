@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>
+            Instructors
+        </title>
+        <script src="jquery-3.2.1.js"></script>
+    </head>
+    <body>
+        <h1>Instructors</h1>
+        <a href="\instructors\add">Add Student</a>
+        <table>
+            <thead>
+                <th>
+                    Instructor Name
+                </th>
+                <th>Department</th>
+            </thead>
+            <tbody>
+              
+                <%for (instructor of instructors){%>
+                <tr id="<%=instructor['_id']%>">
+                    <td>
+                        <%=instructor["fullname"]%>
+                    </td>
+                    <td>
+                        <%= instructor["department"]["name"]%>
+                    </td>
+                    <td>
+                        <button onClick="edit(<%=instructor['_id']%>)">edit</button>
+                    </td>
+                    <td>
+                        <button onClick="remove(<%=instructor['_id']%>)">delete</button>
+                    </td>
+                </tr>
+                <%}%>
+                  
+            </tbody>
+        </table>
+        <script>
+                function edit(id){
+                    //$ajaxCode 
+                }
+                function remove(id){
+                    //$ajaxCode
+                    $.ajax({
+                url: "http://localhost:8080/instructors/delete/"+id,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ id }),
+                dataType: "json",
+                success: function (result) {
+                    document.getElementById(id).remove();
+                },
+                error: function (error) {
+                    console.log(error + "");
+                }
+            });
+                    
+                }
+
+
+        </script>
+    </body>
+</html>
+
+
