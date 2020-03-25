@@ -1,10 +1,69 @@
-<html>
-    <head>
-        <title>
-            Students
-        </title>
-    </head>
-    <body>
-        <h1>Students</h1>
-    </body>
-</html>
+<%- include("header.ejs")%>
+
+        <h1>Courses</h1>
+        <a href="\courses\add">Add Student</a>
+        <table>
+            <thead>
+                <th>
+                    Course Name
+                </th>
+                <th>
+                    Lecture Hours
+                </th>
+                <th>
+                    lab Hours
+                </th>
+            </thead>
+            <tbody>
+              
+                <%for (course of courses){%>
+                <tr id="<%=course['_id']%>">
+                    <td>
+                        <%=course["name"]%>
+                    </td>
+                    <td>
+                        <%= course["lectureHours"]%>
+                    </td>
+                    <td>
+                        <%= course["labHours"]%>
+                    </td>
+                    <td>
+                        <button onClick="edit(<%= course['_id'] %>)">edit</button>
+                    </td>
+                    <td>
+                        <button onClick="remove(<%= course['_id'] %>)">delete</button>
+                    </td>
+                </tr>
+                <%}%>
+                  
+            </tbody>
+        </table>
+        <script>
+                function edit(id){
+                    //$ajaxCode 
+                }
+                function remove(id){
+                    //$ajaxCode
+                $.ajax({
+                url: "http://localhost:8080/courses/delete/"+id,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ id }),
+                dataType: "json",
+                success: function (result) {
+                    $(""+id+"").remove();
+                    document.getElementById(id).remove();
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.log(error + "");
+                }
+            });
+                    
+                }
+
+
+        </script>
+<%- include("footer.ejs")%>
+
+

@@ -2,9 +2,13 @@ let express=require("express");
 let expressRouter=express.Router() //Router Object
 let mongoose = require("mongoose");
 require("./../models/instructors")
+require("./../models/departments")
+
+let departmentsSchema = mongoose.model("departments"); //Getting the collection
+
 let instructorsSchema = mongoose.model("instructors"); //Getting the collection
 
-// list students
+// list instructors
 expressRouter.get("/list",(request,response,next)=>{ //get in url
  
     instructorsSchema.find({}).populate("department").then((data) => {      
@@ -16,17 +20,22 @@ expressRouter.get("/list",(request,response,next)=>{ //get in url
     
 });
 expressRouter.get("/add",(request,response,next)=>{ //get in url
-    response.send("add instructor view")
-    next();
+    departmentsSchema.find({}).then((data) => {      
+        console.log(data);
+
+        response.render("addInstructor.ejs",{departments:data});
+
+	}).catch((error) => { console.log(error + "") });
+
     
 });
 expressRouter.post("/add",(request,response,next)=>{ //get in url
-    response.send("add instructor")
+    // response.send("add instructor")
     let newInstructor=new instructorsSchema(
         {
-            fullname: "amira reda",
-            mobile: "01201474300",
-            department: 1
+            fullname: request.body.fullname,
+            mobile: request.body.mobile,
+            department: request.body.department
             
             
         }
@@ -52,11 +61,12 @@ expressRouter.post("/edit",(request,response,next)=>{ //get in url
 });
 expressRouter.post("/delete/:id",(request,response,next)=>{ //get in url
     instructorsSchema.findByIdAndDelete(request.params.id).then((data)=>{
-        console.log("Success")
+        response.redirect("/instructors/list");
+
     }).catch((error)=>{
         console.log("error "+error);
         
     });
-    response.send("success")
+    // response.send("success")
 });
 module.exports=expressRouter

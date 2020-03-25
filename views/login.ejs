@@ -1,11 +1,80 @@
 <html>
     <head>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <title>
             login
         </title>
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+                font-family: tahoma !important;
+            }
+            header{
+                background-color: #bf272d;
+                height:23%
+            }
+            header img{
+                border-radius: 50%;
+        
+            }
+         
+           
+            .form{
+
+                margin-top: 4%;
+                margin-bottom: 5.8%;
+                background-color: lavenderblush;
+                padding: 4%;
+                border-radius: 20%;
+                
+
+            }
+            h2{
+                text-align: center;
+            }
+            .btn{
+                margin-left: 37%;
+                width: 25%;
+                background-color: #bf272d;
+                border-color: #bf272d;
+                color:white
+
+            }
+            span{
+                color:white;
+                margin-left: 5%;
+                font-size: 30px;
+                padding-top: 5%;
+                padding-bottom: 5%;
+                position: absolute;
+                right: 30px;
+
+            }
+           
+        </style>
     </head>
     <body>
-        Welocom login page
-    </body>
-</html>
+        <header>
+            <img class="headerImg" src="images/logo2.png" alt="" >
+            <span>System Management</span>
+        </header>
+        <div class="container">
+        <form class="form" action="\login" method="POST">
+            <h2>Login</h2>
+            <div class="form-group ">
+            <label >username:</label>
+            <input class="form-control" type="text" name="username" id="username" placeholder="admin username">
+        </div>
+            <div class="form-group ">
+
+            <label >password:</label>
+            <input  class="form-control" type="password" name="password" id="password" placeholder="admin password">
+            </div>
+            <br>
+            <button class="btn" type="submit">Sign In</button>
+
+        </form>
+        
+    </div>
+      <%- include("footer.ejs")%>

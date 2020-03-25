@@ -19,28 +19,24 @@ expressRouter.get("/list",(request,response,next)=>{ //get in url
 
 });
 expressRouter.get("/add",(request,response,next)=>{ //get in url
-	// response.send("add depts view")
-	// next();
+	response.render("addDepartment.ejs")	
+});
+expressRouter.post("/add",(request,response,next)=>{ //get in url
 	let newDepartment=new departmentsSchema(
 		{
-			name: "OS",
-			manager: 1
+			name: request.body.name,
+			manager: 0
 
 
 		}
 	);
 	newDepartment.save(
 		(error)=>{
-			console.log("dd"+error);
+			// console.log("error " + error);
 
 		}
 	);
-	response.send("jkg"); 
-});
-expressRouter.post("/add",(request,response,next)=>{ //get in url
-	response.send("add depts")
-	next();
-
+next();
 });
 expressRouter.get("/edit",(request,response,next)=>{ //get in url
 	response.send("edit depts view")

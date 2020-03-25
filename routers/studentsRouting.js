@@ -6,8 +6,15 @@ let studentsSchema = mongoose.model("students"); //Getting the collection
 
 // list students
 expressRouter.get("/list",(request,response,next)=>{ //get in url
-    response.send("list students")
-    next();
+ 
+        studentsSchema.find({}).populate("courses","department").then((data) => {      
+            console.log(data);
+            
+            response.render("students.ejs", { students: data });
+    
+        }).catch((error) => { console.log(error + "") });
+    
+        
     
 });
 expressRouter.get("/add",(request,response,next)=>{ //get in url

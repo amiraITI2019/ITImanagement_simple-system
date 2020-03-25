@@ -2,37 +2,68 @@ let express=require("express");
 let expressRouter=express.Router() //Router Object
 let mongoose = require("mongoose");
 require("./../models/courses")
-let coursesSchema = mongoose.model("courses"); //Getting the collection
 
-// list students
+let coursessSchema = mongoose.model("courses"); //Getting the collection
+
+
+// list courses
 expressRouter.get("/list",(request,response,next)=>{ //get in url
-    response.send("list courses")
-    next();
+ 
+    coursessSchema.find({}).then((data) => {      
+
+        response.render("courses.ejs", { courses: data });
+
+	}).catch((error) => { console.log(error + "") });
+
     
 });
 expressRouter.get("/add",(request,response,next)=>{ //get in url
-    response.send("add course view")
-    next();
+    coursessSchema.find({}).then((data) => {      
+        console.log(data);
+
+        response.render("addCourse.ejs",{courses:data});
+
+	}).catch((error) => { console.log(error + "") });
+
     
 });
 expressRouter.post("/add",(request,response,next)=>{ //get in url
-    response.send("add course")
+    // response.send("add instructor")
+    let newCourse=new coursessSchema(
+        {
+            fullname: request.body.name,
+            lectureHours: request.body.lectureHours,
+            labHours: request.body.labHours
+            
+            
+        }
+    );
+    newCourse.save(
+        (error)=>{
+            console.log("error "+error);
+            
+        }
+    );
     next();
     
 });
 expressRouter.get("/edit",(request,response,next)=>{ //get in url
-    response.send("edit course view")
+    response.send("edit instructor view")
     next();
     
 });
 expressRouter.post("/edit",(request,response,next)=>{ //get in url
-    response.send("edit course")
+    response.send("edit instructor")
     next();
     
 });
-expressRouter.post("/delete",(request,response,next)=>{ //get in url
-    response.send("delete course")
-    next();
-    
+expressRouter.post("/delete/:id",(request,response,next)=>{ //get in url
+    coursessSchema.findByIdAndDelete(request.params.id).then((data)=>{
+        response.status(200);
+    }).catch((error)=>{
+        console.log("error "+error);
+        
+    });
+    // response.send("success")
 });
 module.exports=expressRouter

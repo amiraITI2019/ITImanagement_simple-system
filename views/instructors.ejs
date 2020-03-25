@@ -1,11 +1,5 @@
-<html>
-    <head>
-        <title>
-            Instructors
-        </title>
-        <script src="jquery-3.2.1.js"></script>
-    </head>
-    <body>
+<%- include("header.ejs")%>
+
         <h1>Instructors</h1>
         <a href="\instructors\add">Add Student</a>
         <table>
@@ -26,10 +20,10 @@
                         <%= instructor["department"]["name"]%>
                     </td>
                     <td>
-                        <button onClick="edit(<%=instructor['_id']%>)">edit</button>
+                        <button onClick="edit(<%= instructor['_id'] %>)">edit</button>
                     </td>
                     <td>
-                        <button onClick="remove(<%=instructor['_id']%>)">delete</button>
+                        <button onClick="remove(<%= instructor['_id'] %>)">delete</button>
                     </td>
                 </tr>
                 <%}%>
@@ -42,14 +36,16 @@
                 }
                 function remove(id){
                     //$ajaxCode
-                    $.ajax({
+                $.ajax({
                 url: "http://localhost:8080/instructors/delete/"+id,
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({ id }),
                 dataType: "json",
                 success: function (result) {
-                    document.getElementById(id).remove();
+                    $("#"+id+"").remove();
+                    // document.getElementById(id).remove();
+                    // window.location.reload();
                 },
                 error: function (error) {
                     console.log(error + "");
@@ -60,7 +56,6 @@
 
 
         </script>
-    </body>
-</html>
+<%- include("footer.ejs")%>
 
 

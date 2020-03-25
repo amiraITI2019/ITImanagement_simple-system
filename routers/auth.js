@@ -14,9 +14,20 @@ expressRouter.get("/login",(request,response,next)=>{ //get in url
     
 });
 expressRouter.post("/login",(request,response,next)=>{ //post hidden 
-    response.send("post login")
-    next();
+    // console.log(;
     
+    if(request.body["username"]=="admin"&&request.body["password"]=="123"){
+        request.session.role = 'admin';
+        response.redirect("/home");
+
+    }
+    else{
+        response.send("username or password isn't correct")
+    }
+    
+});
+expressRouter.get("/home",(request,response,next)=>{
+response.render("home.ejs")
 });
 expressRouter.get("/register",(request,response,next)=>{
     response.send("get register")

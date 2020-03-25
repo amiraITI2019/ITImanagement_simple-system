@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Add Instructor</title>
+    </head>
+    <body>
+        <form action="\instructors\add" method="POST">
+            <label for="">fullname</label>
+            <input type="text" name="fullname" id="fullname">
+            <label for="">mobile Phone</label>
+            <input type="text" name="mobile" id="mobile">
+            <label for="">department</label>
+            <!-- <input type="number" name="department" id="department"> -->
+            <select name="department" id="department">
+                <%for (dept of departments){%>
+                    <option value=<%=dept['_id']%>><%=dept['name']%></option>
+                <%}%>
+            </select>
+            <button type="submit">Add Instructor</button>
+        </form>
+    </body>
+</html>
