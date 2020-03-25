@@ -44,8 +44,20 @@ expressRouter.post("/add", (request, response, next) => { //get in url
     response.redirect("/departments/list");
 });
 expressRouter.get("/edit", (request, response, next) => { //get in url
-    response.send("edit depts view")
-    next();
+    instructorsSchema.find({}).then((data) => {
+        departmentsSchema.findOne({ _id: request.query.id }).then((data2) => {
+
+
+            response.render("editDepartment.ejs", { instructors: data, department: data2 });
+        }).catch((error) => {
+            console.log(error);
+
+        });
+    }).catch((error) => {
+        console.log("" + error);
+
+
+    });
 
 });
 expressRouter.post("/edit", (request, response, next) => { //get in url
