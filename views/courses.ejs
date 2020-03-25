@@ -1,67 +1,67 @@
 <%- include("header.ejs")%>
-        <h1>Courses</h1>
-        <a href="\courses\add">Add Student</a>
-        <table>
+    <div class="container">
+        <h1 style="text-align: center;">Courses</h1>
+        <a class="btn btn-success" style="    position: absolute;
+        top: 10%;
+        right: 3%;" href="\courses\add">Add Course</a>
+        <table class="table table-striped table-secondary">
             <thead>
-                <th>
-                    Course Name
-                </th>
-                <th>
-                    Lecture Hours
-                </th>
-                <th>
-                    lab Hours
-                </th>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Course Name </th>
+                    <th scope="col">Lecture Hours</th>
+                    <th scope="col">lab Hours</th>
+                </tr>
             </thead>
             <tbody>
-              
                 <%for (course of courses){%>
-                <tr id="<%=course['_id']%>">
-                    <td>
-                        <%=course["name"]%>
-                    </td>
-                    <td>
-                        <%= course["lectureHours"]%>
-                    </td>
-                    <td>
-                        <%= course["labHours"]%>
-                    </td>
-                    <td>
-                        <button onClick="edit(<%= course['_id'] %>)">edit</button>
-                    </td>
-                    <td>
-                        <button onClick="remove(<%= course['_id'] %>)">delete</button>
-                    </td>
-                </tr>
-                <%}%>
-                  
+                    <tr id="<%=course['_id']%>">
+                        <th scope="row">
+                            <%=course['_id']%>
+                        </th>
+                        <td>
+                            <%=course["name"]%>
+                        </td>
+                        <td>
+                            <%= course["lectureHours"]%>
+                        </td>
+                        <td>
+                            <%= course["labHours"]%>
+                        </td>
+                        <td>
+                            <a type="submit" href="edit?id=<%= course['_id']%>" class="btn btn-primary">edit</a>
+                        </td>
+                        <td>
+                            <button onClick="remove(<%= course['_id'] %>)">delete</button>
+                        </td>
+                    </tr>
+                    <%}%>
             </tbody>
         </table>
-        <script>
-                function edit(id){
-                    //$ajaxCode 
-                }
-                function remove(id){
-                    //$ajaxCode
-                $.ajax({
-                url: "http://localhost:8080/courses/delete/"+id,
+
+    </div>
+    <script>
+        function remove(id) {
+            //$ajaxCode
+            $.ajax({
+                url: "http://localhost:8080/courses/delete/" + id,
                 method: "POST",
                 contentType: "application/json",
-                data: JSON.stringify({ id }),
+                data: JSON.stringify({
+                    id
+                }),
                 dataType: "json",
-                success: function (result) {
-                    $(""+id+"").remove();
+                success: function(result) {
+                    $("" + id + "").remove();
                     document.getElementById(id).remove();
                     window.location.reload();
                 },
-                error: function (error) {
+                error: function(error) {
                     console.log(error + "");
                 }
             });
-                    
-                }
 
+        }
+    </script>
 
-        </script>
-
-<%- include("footer.ejs")%>
+    <%- include("footer.ejs")%>

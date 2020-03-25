@@ -1,36 +1,64 @@
-<%- include("header.ejs")%>
 
-        <h1>Departments</h1>
-        <table>
-            <thead>
-                <th>
-                    Department Name
-                </th>
-                <th>Manager</th>
-            </thead>
-            <tbody>
-                <!-- <tr>
-                    <td>
-                        OS
-                    </td>
-                    <td>
-                        Hend Samir
-                    </td>
-                </tr> -->
-                <% for (department of departments){ %>
-                    <tr>
-                        <td>
-                            <%= department["name"] %>
-                        </td>
-                        <td>
-                            <%= department["manager"]["fullname"] %>
-                        </td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                <%}%>
-            </tbody>
-        </table>
-        <%- include("footer.ejs")%>
+<%- include("header.ejs")%>
+<div class="container">
+	<h1 style="text-align: center;">Departments</h1>
+	<a class="btn btn-success" style="    position: absolute;
+        top: 10%;
+        right: 3%;" href="\departments\add">Add Department</a>
+	<table class="table table-striped table-secondary">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Department Name</th>
+				<th scope="col">Manager</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for (department of departments){ %>
+				<tr>
+					<td>
+						<%= department["name"] %>
+					</td>
+					<td>
+						<%= department["manager"]["fullname"] %>
+					</td>
+					<td>
+						<button onClick="edit(<%= course['_id'] %>)">edit</button>
+					</td>
+					<td>
+						<button onClick="remove(<%= course['_id'] %>)">delete</button>
+					</td>
+				</tr>
+				<%}%>
+		</tbody>
+		</table>
+
+	</div>
+	<script>
+		function edit(id){
+			//$ajaxCode 
+		}
+		function remove(id){
+			//$ajaxCode
+		$.ajax({
+		url: "http://localhost:8080/courses/delete/"+id,
+		method: "POST",
+		contentType: "application/json",
+		data: JSON.stringify({ id }),
+		dataType: "json",
+		success: function (result) {
+			$(""+id+"").remove();
+			document.getElementById(id).remove();
+			window.location.reload();
+		},
+		error: function (error) {
+			console.log(error + "");
+		}
+		});
+
+			}
+
+
+	</script>
+
+<%- include("footer.ejs")%>

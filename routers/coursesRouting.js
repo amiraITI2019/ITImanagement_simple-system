@@ -1,5 +1,5 @@
-let express=require("express");
-let expressRouter=express.Router() //Router Object
+let express = require("express");
+let expressRouter = express.Router() //Router Object
 let mongoose = require("mongoose");
 require("./../models/courses")
 
@@ -7,63 +7,60 @@ let coursessSchema = mongoose.model("courses"); //Getting the collection
 
 
 // list courses
-expressRouter.get("/list",(request,response,next)=>{ //get in url
- 
-    coursessSchema.find({}).then((data) => {      
+expressRouter.get("/list", (request, response, next) => { //get in url
+
+    coursessSchema.find({}).then((data) => {
 
         response.render("courses.ejs", { courses: data });
 
-	}).catch((error) => { console.log(error + "") });
+    }).catch((error) => { console.log(error + "") });
 
-    
+
 });
-expressRouter.get("/add",(request,response,next)=>{ //get in url
-    coursessSchema.find({}).then((data) => {      
-        console.log(data);
+expressRouter.get("/add", (request, response, next) => { //get in url
 
-        response.render("addCourse.ejs",{courses:data});
+    response.render("addCourse.ejs");
 
-	}).catch((error) => { console.log(error + "") });
 
-    
+
 });
-expressRouter.post("/add",(request,response,next)=>{ //get in url
+expressRouter.post("/add", (request, response, next) => { //get in url
     // response.send("add instructor")
-    let newCourse=new coursessSchema(
-        {
-            fullname: request.body.name,
-            lectureHours: request.body.lectureHours,
-            labHours: request.body.labHours
-            
-            
-        }
-    );
+    let newCourse = new coursessSchema({
+        name: request.body.Coursename,
+        lectureHours: request.body.lectureHours,
+        labHours: request.body.labHours
+
+
+    });
     newCourse.save(
-        (error)=>{
-            console.log("error "+error);
-            
+        (error) => {
+            console.log("error " + error);
+
         }
     );
-    next();
-    
+    response.redirect("/courses/list");
 });
-expressRouter.get("/edit",(request,response,next)=>{ //get in url
-    response.send("edit instructor view")
-    next();
-    
+expressRouter.get("/edit", (request, response, next) => { //get in url
+
+    coursessSchema.findOne({ _id: request.query.id }).then((data) => {
+        response.render("editCourse.ejs", { course: data });
+    }).catch((error) => { console.log(error + "") });
+
+
 });
-expressRouter.post("/edit",(request,response,next)=>{ //get in url
+expressRouter.post("/edit", (request, response, next) => { //get in url
     response.send("edit instructor")
     next();
-    
+
 });
-expressRouter.post("/delete/:id",(request,response,next)=>{ //get in url
-    coursessSchema.findByIdAndDelete(request.params.id).then((data)=>{
+expressRouter.post("/delete/:id", (request, response, next) => { //get in url
+    coursessSchema.findByIdAndDelete(request.params.id).then((data) => {
         response.status(200);
-    }).catch((error)=>{
-        console.log("error "+error);
-        
+    }).catch((error) => {
+        console.log("error " + error);
+
     });
     // response.send("success")
 });
-module.exports=expressRouter
+module.exports = expressRouter

@@ -1,5 +1,5 @@
-let express=require("express");
-let expressRouter=express.Router() //Router Object
+let express = require("express");
+let expressRouter = express.Router() //Router Object
 let mongoose = require("mongoose");
 require("./../models/departments")
 let departmentsSchema = mongoose.model("departments"); //Getting the collection
@@ -8,49 +8,54 @@ let instructorsSchema = mongoose.model("instructors"); //Getting the collection
 
 
 // list students
-expressRouter.get("/list",(request,response,next)=>{ //get in url
-	departmentsSchema.find({}).populate("manager").then((data) => {      
+expressRouter.get("/list", (request, response, next) => { //get in url
+    departmentsSchema.find({}).populate("manager").then((data) => {
         console.log(data);
 
         response.render("departments.ejs", { departments: data });
 
-	}).catch((error) => { console.log(error + "") });
+    }).catch((error) => { console.log(error + "") });
 
 
 });
-expressRouter.get("/add",(request,response,next)=>{ //get in url
-	response.render("addDepartment.ejs")	
+expressRouter.get("/add", (request, response, next) => { //get in url
+    instructorsSchema.find({}).then((data) => {
+        response.render("addDepartment.ejs", { instructors: data });
+
+    }).catch((error) => {
+        console.log("" + error);
+
+
+    });
 });
-expressRouter.post("/add",(request,response,next)=>{ //get in url
-	let newDepartment=new departmentsSchema(
-		{
-			name: request.body.name,
-			manager: 0
+expressRouter.post("/add", (request, response, next) => { //get in url
+    let newDepartment = new departmentsSchema({
+        name: request.body.name,
+        manager: 0
 
 
-		}
-	);
-	newDepartment.save(
-		(error)=>{
-			// console.log("error " + error);
+    });
+    newDepartment.save(
+        (error) => {
+            // console.log("error " + error);
 
-		}
-	);
-next();
+        }
+    );
+    response.redirect("/departments/list");
 });
-expressRouter.get("/edit",(request,response,next)=>{ //get in url
-	response.send("edit depts view")
-	next();
-
-});
-expressRouter.post("/edit",(request,response,next)=>{ //get in url
-	response.send("edit depts")
-	next();
-
-});
-expressRouter.post("/delete",(request,response,next)=>{ //get in url
-	response.send("delete depts")
-	next();
+expressRouter.get("/edit", (request, response, next) => { //get in url
+    response.send("edit depts view")
+    next();
 
 });
-module.exports=expressRouter
+expressRouter.post("/edit", (request, response, next) => { //get in url
+    response.send("edit depts")
+    next();
+
+});
+expressRouter.post("/delete", (request, response, next) => { //get in url
+    response.send("delete depts")
+    next();
+
+});
+module.exports = expressRouter
