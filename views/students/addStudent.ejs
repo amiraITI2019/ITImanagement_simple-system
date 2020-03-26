@@ -35,6 +35,7 @@
 
             <label for="department">Department</label>
             <select class="form-control" name="department" id="department">
+                <option value="-1">Select Department</option>
                 <%for (dept of departments){%>
                     <option value=<%=dept['_id']%>><%=dept['name']%></option>
                 <%}%>

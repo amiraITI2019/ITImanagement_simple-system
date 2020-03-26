@@ -14,54 +14,37 @@
             </thead>
 
             <tbody>
+                <%index=1;%>
                 <% for (student of students){ %>
                     <tr id="<%=student['_id']%>">
                         <td>
-                            <%=student["_id"]%>
+                            <%=index%>
                         </td>
                         <td>
                             <%=student["fullname"]%>
                         </td>
                         <td>
+                            <%if(student["department"]){%>
+
                             <%= student["department"]["name"]%>
+                            <%}%>
                         </td>
 
                         <td>
                             <a type="submit" href="edit?id=<%= student['_id']%>" class="btn btn-primary">edit</a>
                         </td>
                         <td>
-                            <button onClick="remove(<%= student['_id'] %>)">delete</button>
+                            <form class="Delete" action="/students/delete" method="POST">
+                                <input  type="hidden" name="_id" id="_id" value="<%=student['_id']%>">
+                                <input type="submit"  class=" btn btn-danger" value="Delete"></input>
+                            </form>
                         </td>
                     </tr>
+                    <%index+=1;%>
                     <%}%>
-
-
 
             </tbody>
         </table>
 
     </div>
-    <script>
-        function remove(id) {
-            //$ajaxCode
-            $.ajax({
-                url: "http://localhost:8080/students/delete/" + id,
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    id
-                }),
-                dataType: "json",
-                success: function(result) {
-                    $("" + id + "").remove();
-                    document.getElementById(id).remove();
-                    window.location.reload();
-                },
-                error: function(error) {
-                    console.log(error + "");
-                }
-            });
-
-        }
-    </script>
     <%- include("../base/footer.ejs")%>

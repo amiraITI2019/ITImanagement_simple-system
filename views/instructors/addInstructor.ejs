@@ -7,16 +7,21 @@
     <h1>Add Instructor</h1>
     <form action="\instructors\add" method="POST">
         <div class="form-group">
-            <label for="fullname">fullname</label>
-            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="full name">
+            <label for="fullname">* fullname</label>
+            <input type="text" required class="form-control" name="fullname" id="fullname" placeholder="full name">
+            <!-- <span class="help-block text-success">* required</span> -->
+
         </div>
         <div class="form-group">
-            <label for="mobile">mobile Phone</label>
-            <input type="text" class="form-control" name="mobile" id="mobile">
+            <label for="mobile">* mobile Phone</label>
+            <input type="tel" pattern="^01[0-2]\d{1,8}$" required  class="form-control" name="mobile" id="mobile">
+            <span class="help-block text-success">Please Type a valid Egyptian Mobile Number starts with 01</span>
+
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Department</label>
             <select class="form-control" id="exampleFormControlSelect1" name="department">
+                <option value="-1">Select Department</option>
 				<%for (dept of departments){%>
 					<option value=<%=dept['_id']%>><%=dept['name']%></option>
 				<%}%>

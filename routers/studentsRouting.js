@@ -86,8 +86,13 @@ expressRouter.post("/edit", (request, response, next) => {
 
 });
 expressRouter.post("/delete", (request, response, next) => { //get in url
-    response.send("delete student")
-    next();
+    studentsSchema.findByIdAndDelete({_id:request.body._id}).then((data) => {
+        response.redirect("/students/list");
+
+    }).catch((error) => {
+        console.log("error " + error);
+
+    });
 
 });
 module.exports = expressRouter

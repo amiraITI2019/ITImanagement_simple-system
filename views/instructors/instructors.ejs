@@ -14,10 +14,11 @@
                 </tr>
             </thead>
             <tbody>
+                <%index=1;%>
                 <% for (instructor of instructors){ %>
                     <tr id="<%=instructor['_id']%>">
                         <td>
-                            <%=instructor["_id"]%>
+                            <%=index%>
                         </td>
                         <td>
                             <%=instructor["fullname"]%>
@@ -26,19 +27,22 @@
                             <%= instructor["mobile"]%>
                         </td>
                         <td>
+                            <%if(instructor["department"]){%>
                             <%= instructor["department"]["name"]%>
+                            <%}%>
                         </td>
                         <td>
                             <a type="submit" href="edit?id=<%= instructor['_id']%>" class="btn btn-primary">edit</a>
 
                         </td>
                         <td>
-                            <form action="/instructors/delete" method="POST">
+                            <form class="Delete" action="/instructors/delete" method="POST">
                                 <input  type="hidden" name="_id" id="_id" value="<%=instructor['_id']%>">
                                 <input type="submit"  class=" btn btn-danger" value="Delete"></input>
                             </form>
                         </td>
                     </tr>
+                    <%index+=1;%>
                     <%}%>
 
 

@@ -14,10 +14,11 @@
                 </tr>
             </thead>
             <tbody>
+                <%index=1;%>
                 <%for (course of courses){%>
                     <tr id="<%=course['_id']%>">
                         <th scope="row">
-                            <%=course['_id']%>
+                            <%=index%>
                         </th>
                         <td>
                             <%=course["name"]%>
@@ -32,12 +33,14 @@
                             <a type="submit" href="edit?id=<%= course['_id']%>" class="btn btn-primary">edit</a>
                         </td>
                         <td>
-                            <form action="/courses/delete" method="POST">
+                            <form class="Delete" action="/courses/delete" method="POST">
                                 <input  type="hidden" name="_id" id="_id" value="<%=course['_id']%>">
                                 <input type="submit"  class=" btn btn-danger" value="Delete"></input>
                             </form>
                         </td>
                     </tr>
+                    <%index+=1;%>
+
                     <%}%>
             </tbody>
         </table>

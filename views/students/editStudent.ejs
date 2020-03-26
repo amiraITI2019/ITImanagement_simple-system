@@ -37,6 +37,7 @@
 
             <label for="department">Department</label>
             <select class="form-control" name="department" id="department">
+                <option value="-1">Select Department</option>
 				<%for (dept of departments){%>
 					<%if(dept["_id"]===student["department"]){%>
 						<option selected value=<%=dept['_id']%>><%=dept['name']%></option>
@@ -46,7 +47,7 @@
 		</select>
         </div>
         <div class="form-group">
-            <label for="courses">Select courses to add to students: </label>
+            <label for="courses">Select courses to add it/them to student: </label>
             <select multiple class="form-control" id="courses" name="courses">
                 <%for (course of courses){%>
 					<%if((student["courses"].findIndex((element)=>{return element===course["_id"];}))!=-1 ){%>

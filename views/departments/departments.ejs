@@ -13,28 +13,33 @@
                 </tr>
             </thead>
             <tbody>
+                <%index=1;%>
+
                 <% for (department of departments){ %>
                     <tr>
                         <td>
-                            <%= department["_id"] %>
+                            <%= index %>
                         </td>
                         <td>
                             <%= department["name"] %>
                         </td>
                         <td>
+                            <%if(department["manager"]){%>
                             <%= department["manager"]["fullname"] %>
+                            <%}%>
                         </td>
                         <td>
                             <a type="submit" href="edit?id=<%= department['_id']%>" class="btn btn-primary">edit</a>
 
                         </td>
                         <td>
-                            <form action="/departments/delete" method="POST">
+                            <form class="Delete" action="/departments/delete" method="POST">
                                 <input  type="hidden" name="_id" id="_id" value="<%=department['_id']%>">
                                 <input type="submit"  class=" btn btn-danger" value="Delete"></input>
                             </form>
                         </td>
                     </tr>
+                    <%index+=1;%>
                     <%}%>
             </tbody>
         </table>

@@ -15,6 +15,7 @@
         <div class="form-group">
             <label for="manager">Manager</label>
             <select class="form-control" id="manager" name="manager">
+                <option value="-1">Select Manager</option>
                 <%for (instructor of instructors){%>
                     <%if(instructor["_id"]==department["manager"]){%>
                     <option selected=true value=<%=instructor["_id"]%>><%=instructor["fullname"]%></option>

@@ -16,9 +16,10 @@
             <label for="mobile">mobile Phone</label>
             <input type="text" class="form-control" name="mobile" id="mobile" value="<%=instructor['mobile']%>">
         </div>
-        <div class=" form-group ">
-            <label for="exampleFormControlSelect1 ">Department</label>
-            <select class="form-control " id="exampleFormControlSelect1 " name="department ">
+        <div class=" form-group">
+            <label for="exampleFormControlSelect1">Department</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="department">
+                <option value="-1">Select Department</option>
                 <%for (dept of departments){%>
                     <%if(dept['_id']==instructor['department']){%>
                     <option selected value=<%=dept['_id']%>><%=dept['name']%></option>
@@ -28,6 +29,6 @@
                     <%}}%>
 		    </select>
         </div>
-        <input type="submit" class="btn btn-success " style="margin-left: 40%;" value="Save Instructor" />
+        <input type="submit" class="btn btn-success" style="margin-left: 40%;" value="Save Instructor" />
     </form>
     <%- include("../base/footer.ejs")%>

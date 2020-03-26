@@ -73,6 +73,5 @@ expressRouter.post("/delete", (request, response, next) => { //get in url
         console.log("error " + error);
 
     });
-    // response.send("success")
 });
 module.exports = expressRouter
