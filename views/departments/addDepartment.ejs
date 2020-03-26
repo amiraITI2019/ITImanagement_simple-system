@@ -8,7 +8,7 @@
     <form action="\departments\add" method="POST">
         <div class="form-group">
             <label for="">Department Name</label>
-            <input class="form-control" type="text" name="name" id="name">
+            <input required class="form-control" type="text" name="name" id="name">
         </div>
         <div class="form-group">
             <label for="manager">Manager</label>
@@ -20,7 +20,8 @@
                     <%}%>
             </select>
         </div>
-        <input type="submit" class="btn btn-success" style="margin-left: 40%;" value="Add Department">
+        <input type="submit" class="btn btn-success"  value="Add Department">
+        <a href="/departments/list" class="btn btn-success">Departments List</a>
 
 
     </form>

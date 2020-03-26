@@ -21,7 +21,7 @@ expressRouter.get("/login", (request, response, next) => { //get in url
 expressRouter.post("/login", (request, response, next) => { //post hidden 
     // console.log(;
 
-    if (request.body["username"] == "admin" && request.body["password"] == "123") {
+    if (request.body["username"] == "admin" && request.body["password"] == "admin123") {
         request.session.role = 'admin';
         response.redirect("/home");
 

@@ -9,7 +9,7 @@
     <form action="\courses\add" method="POST">
         <div class="form-group">
             <label for="">CourseName</label>
-            <input type="text" class="form-control" name="Coursename" id="Coursename" placeholder="Course name">
+            <input required type="text" class="form-control" name="Coursename" id="Coursename" placeholder="Course name">
         </div>
         <div class="form-group">
             <label for="">Lecture Hours</label>
@@ -19,7 +19,8 @@
             <label for="">Lab Hours</label>
             <input type="number" class="form-control" name="labHours" id="labHours">
         </div>
-        <input type="submit" class="btn btn-success" style="margin-left: 40%;" value="Add Course">
+        <input type="submit" class="btn btn-success"  value="Add Course">
+        <a href="/courses/list" class="btn btn-success">Courses List</a>
 
 
     </form>

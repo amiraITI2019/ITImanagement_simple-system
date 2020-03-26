@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label for="">CourseName</label>
-            <input type="text" class="form-control" name="name" id="Coursename" value="<%=course[ 'name']%>">
+            <input required type="text" class="form-control" name="name" id="Coursename" value="<%=course[ 'name']%>">
         </div>
         <div class="form-group">
             <label for="lectureHours">Lecture Hours</label>
@@ -20,6 +20,8 @@
             <label for="labHours">Lab Hours</label>
             <input type="number" class="form-control" name="labHours" id="labHours" value="<%=course[ 'labHours']%>">
         </div>
-        <input type="submit" class="btn btn-success" style="margin-left: 40%; " value="Save Course">
+        <input type="submit" class="btn btn-success"  value="Save Course">
+        <a href="/courses/list" class="btn btn-success">Courses List</a>
+
     </form>
     <%- include("../base/footer.ejs")%>

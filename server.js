@@ -55,7 +55,7 @@ let departmentsRouter=require("./routers/departmentsRouting");
 app.use("/departments",departmentsRouter);
 //default middle ware
 app.use((request,response,next)=>{
-    response.send("can't find router");  //send response 
+    response.render("404.ejs");  //send response 
     
 });
 

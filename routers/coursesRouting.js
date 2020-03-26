@@ -25,7 +25,8 @@ expressRouter.get("/add", (request, response, next) => { //get in url
 
 });
 expressRouter.post("/add", (request, response, next) => { //get in url
-    // response.send("add instructor")
+
+
     let newCourse = new coursessSchema({
         name: request.body.Coursename,
         lectureHours: request.body.lectureHours,
