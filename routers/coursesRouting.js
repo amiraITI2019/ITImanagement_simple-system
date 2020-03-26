@@ -11,7 +11,7 @@ expressRouter.get("/list", (request, response, next) => { //get in url
 
     coursessSchema.find({}).then((data) => {
 
-        response.render("courses.ejs", { courses: data });
+        response.render("courses/courses.ejs", { courses: data });
 
     }).catch((error) => { console.log(error + "") });
 
@@ -19,7 +19,7 @@ expressRouter.get("/list", (request, response, next) => { //get in url
 });
 expressRouter.get("/add", (request, response, next) => { //get in url
 
-    response.render("addCourse.ejs");
+    response.render("courses/addCourse.ejs");
 
 
 
@@ -44,7 +44,7 @@ expressRouter.post("/add", (request, response, next) => { //get in url
 expressRouter.get("/edit", (request, response, next) => { //get in url
 
     coursessSchema.findOne({ _id: request.query.id }).then((data) => {
-        response.render("editCourse.ejs", { course: data });
+        response.render("courses/editCourse.ejs", { course: data });
     }).catch((error) => { console.log(error + "") });
 
 

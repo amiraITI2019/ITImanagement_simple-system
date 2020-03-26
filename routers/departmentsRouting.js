@@ -12,7 +12,7 @@ expressRouter.get("/list", (request, response, next) => { //get in url
     departmentsSchema.find({}).populate("manager").then((data) => {
         console.log(data);
 
-        response.render("departments.ejs", { departments: data });
+        response.render("departments/departments.ejs", { departments: data });
 
     }).catch((error) => { console.log(error + "") });
 
@@ -20,7 +20,7 @@ expressRouter.get("/list", (request, response, next) => { //get in url
 });
 expressRouter.get("/add", (request, response, next) => { //get in url
     instructorsSchema.find({}).then((data) => {
-        response.render("addDepartment.ejs", { instructors: data });
+        response.render("departments/addDepartment.ejs", { instructors: data });
 
     }).catch((error) => {
         console.log("" + error);
@@ -48,7 +48,7 @@ expressRouter.get("/edit", (request, response, next) => { //get in url
         departmentsSchema.findOne({ _id: request.query.id }).then((data2) => {
 
 
-            response.render("editDepartment.ejs", { instructors: data, department: data2 });
+            response.render("departments/editDepartment.ejs", { instructors: data, department: data2 });
         }).catch((error) => {
             console.log(error);
 

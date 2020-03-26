@@ -1,39 +1,39 @@
-<%- include("header.ejs")%>
-<style>
-	.card{
-		padding: 0;
-	}
-	.container{
-		margin-top: 10%;
-		margin-bottom: 20%;
+<%- include("base/header.ejs")%>
+    <style>
+        .card {
+            padding: 0;
+        }
+        
+        .container {
+            margin-top: 10%;
+            margin-bottom: 20%;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="card col-sm-12 col-md-6">
+                <a href="http://127.0.0.1:8080/students/list" class="card-body btn btn-primary">
+                    <h1 class="card-text">Students</h1>
+                </a>
+            </div>
+            <div class="card col-sm-12 col-md-6">
+                <a href="http://127.0.0.1:8080/instructors/list" class="card-body btn btn-secondary">
+                    <h1 class="card-text">Instructors</h1>
+                </a>
+            </div>
+        </div>
+        <div class="row">
 
-	}
-</style>
-<div class="container">
-<div class="row">
-<div class="card col-sm-12 col-md-6" >
-	<a href="http://127.0.0.1:8080/students/list" class="card-body btn btn-primary">
-	 <h1 class="card-text">Students</h1> 
-	</a>
-  </div>
-<div class="card col-sm-12 col-md-6" >
-	<a href="http://127.0.0.1:8080/instructors/list" class="card-body btn btn-secondary">
-	 <h1 class="card-text">Instructors</h1> 
-	</a>
-  </div>
-</div>
-  <div class="row">
-
-  <div class="card col-sm-12 col-md-6">
-	<a href="http://127.0.0.1:8080/departments/list" class="card-body btn btn-success">
-	 <h1 class="card-text">Departments</h1> 
-	</a>
-  </div>
-  <div class="card col-sm-12 col-md-6" >
-	<a href="http://127.0.0.1:8080/courses/list" class="card-body btn btn-danger">
-	 <h1 class="card-text">Courses</h1> 
-	</a>
-  </div>
-</div>
-</div>
-<%- include("footer.ejs")%>
+            <div class="card col-sm-12 col-md-6">
+                <a href="http://127.0.0.1:8080/departments/list" class="card-body btn btn-success">
+                    <h1 class="card-text">Departments</h1>
+                </a>
+            </div>
+            <div class="card col-sm-12 col-md-6">
+                <a href="http://127.0.0.1:8080/courses/list" class="card-body btn btn-danger">
+                    <h1 class="card-text">Courses</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+    <%- include("base/footer.ejs")%>

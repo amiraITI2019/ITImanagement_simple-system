@@ -7,13 +7,14 @@ studentSchema = new mongoose.Schema({
     username: String,
     address: {
         city: String,
-        street: Number,
-        buliding: Number
+        street: String,
+        building: Number
     },
-    courses:[
-        {type:mongoose.Schema.Types.Number,ref:'courses'}
-    ]    //foreign key
-   
+    courses: [
+        { type: mongoose.Schema.Types.Number, ref: 'courses' }
+    ], //foreign key,
+    department: { type: mongoose.Schema.Types.Number, ref: 'departments' }
+
 });
 
 studentSchema.plugin(autoIncrement.plugin, 'students');

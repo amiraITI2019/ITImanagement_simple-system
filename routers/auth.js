@@ -28,16 +28,7 @@ expressRouter.post("/login", (request, response, next) => { //post hidden
 expressRouter.get("/home", (request, response, next) => {
     response.render("home.ejs")
 });
-expressRouter.get("/register", (request, response, next) => {
-    response.send("get register")
-    next();
 
-});
-expressRouter.post("/register", (request, response, next) => {
-    response.send("post register")
-    next();
-
-});
 expressRouter.get("/logout", (request, response, next) => {
     request.session.destroy();
     response.redirect("/login")
