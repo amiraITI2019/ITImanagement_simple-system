@@ -8,9 +8,14 @@ let expressRouter = express.Router() //Router Object
     // 3) routing parameter eman-->without name   /login/eman/123
     // receive data as json object
     // encryption
+expressRouter.get("/", (request, response, next) => { //get in url
+    response.render("login.ejs")
+
+
+});
 expressRouter.get("/login", (request, response, next) => { //get in url
     response.render("login.ejs")
-    next();
+
 
 });
 expressRouter.post("/login", (request, response, next) => { //post hidden 

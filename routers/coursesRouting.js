@@ -50,17 +50,22 @@ expressRouter.get("/edit", (request, response, next) => { //get in url
 
 });
 expressRouter.post("/edit", (request, response, next) => { //get in url
-    response.send("edit instructor")
-    next();
+    coursessSchema.updateOne({ _id: request.body._id }, { $set: request.body }).then((data => {
+        response.redirect("/courses/list");
 
+    })).catch((error) => { console.log(error + "") });
 });
-expressRouter.post("/delete/:id", (request, response, next) => { //get in url
-    coursessSchema.findByIdAndDelete(request.params.id).then((data) => {
-        response.status(200);
+expressRouter.post("/delete", (request, response, next) => { //get in url
+    coursessSchema.findByIdAndDelete({
+        _id: request.body._id
+    }).then((data) => {
+        console.log(data);
+        
+        response.redirect("/courses/list");
     }).catch((error) => {
         console.log("error " + error);
 
     });
-    // response.send("success")
+
 });
 module.exports = expressRouter

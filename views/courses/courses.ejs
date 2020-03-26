@@ -32,7 +32,10 @@
                             <a type="submit" href="edit?id=<%= course['_id']%>" class="btn btn-primary">edit</a>
                         </td>
                         <td>
-                            <button onClick="remove(<%= course['_id'] %>)">delete</button>
+                            <form action="/courses/delete" method="POST">
+                                <input  type="hidden" name="_id" id="_id" value="<%=course['_id']%>">
+                                <input type="submit"  class=" btn btn-danger" value="Delete"></input>
+                            </form>
                         </td>
                     </tr>
                     <%}%>
@@ -40,28 +43,4 @@
         </table>
 
     </div>
-    <script>
-        function remove(id) {
-            //$ajaxCode
-            $.ajax({
-                url: "http://localhost:8080/courses/delete/" + id,
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    id
-                }),
-                dataType: "json",
-                success: function(result) {
-                    $("" + id + "").remove();
-                    document.getElementById(id).remove();
-                    window.location.reload();
-                },
-                error: function(error) {
-                    console.log(error + "");
-                }
-            });
-
-        }
-    </script>
-
     <%- include("../base/footer.ejs")%>

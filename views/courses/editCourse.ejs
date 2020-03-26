@@ -6,16 +6,18 @@
     </style>
     <h1>Edit Course</h1>
     <form action="\courses\edit" method="POST">
+        <input type="hidden" class="form-control" name="_id" id="_id" value="<%=course['_id']%>">
+
         <div class="form-group">
             <label for="">CourseName</label>
-            <input type="text" class="form-control" name="Coursename" id="Coursename" value="<%=course[ 'name']%>">
+            <input type="text" class="form-control" name="name" id="Coursename" value="<%=course[ 'name']%>">
         </div>
         <div class="form-group">
             <label for="lectureHours">Lecture Hours</label>
-            <input type="number " class="form-control" name="lectureHours" id="lectureHours" value="<%=course[ 'lectureHours']%>">
+            <input type="number" class="form-control" name="lectureHours" id="lectureHours" value="<%=course[ 'lectureHours']%>">
         </div>
-        <div class=" form-group ">
-            <label for="labHours ">Lab Hours</label>
+        <div class=" form-group">
+            <label for="labHours">Lab Hours</label>
             <input type="number" class="form-control" name="labHours" id="labHours" value="<%=course[ 'labHours']%>">
         </div>
         <input type="submit" class="btn btn-success" style="margin-left: 40%; " value="Save Course">

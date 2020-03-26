@@ -6,6 +6,8 @@
     </style>
     <h1>Edit Instructor</h1>
     <form action="\instructors\edit" method="POST">
+        <input type="hidden" class="form-control" name="_id" id="_id" value="<%=instructor['_id']%>">
+
         <div class="form-group">
             <label for="fullname">fullname</label>
             <input type="text" class="form-control" name="fullname" id="fullname" value="<%=instructor['fullname']%>">
@@ -26,6 +28,6 @@
                     <%}}%>
 		    </select>
         </div>
-        <input type="submit" class="btn btn-success " style="margin-left: 40%;" value="Edit Instructor" />
+        <input type="submit" class="btn btn-success " style="margin-left: 40%;" value="Save Instructor" />
     </form>
     <%- include("../base/footer.ejs")%>

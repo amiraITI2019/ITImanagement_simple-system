@@ -6,6 +6,8 @@
     </style>
     <h1>Edit Department</h1>
     <form action="\departments\edit" method="POST">
+        <input type="hidden" class="form-control" name="_id" id="_id" value="<%=department['_id']%>">
+
         <div class="form-group">
             <label for="">Department Name</label>
             <input class="form-control" type="text" name="name" id="name" value="<%=department['name']%> " />
@@ -15,9 +17,9 @@
             <select class="form-control" id="manager" name="manager">
                 <%for (instructor of instructors){%>
                     <%if(instructor["_id"]==department["manager"]){%>
-                    <option selected=true><%=instructor["fullname"]%></option>
+                    <option selected=true value=<%=instructor["_id"]%>><%=instructor["fullname"]%></option>
                     <%} else { %>
-                        <option ><%=instructor["fullname"]%></option>
+                        <option value=<%=instructor["_id"]%>><%=instructor["fullname"]%></option>
 
 
                 <%}}%>

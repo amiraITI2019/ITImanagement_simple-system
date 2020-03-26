@@ -29,12 +29,9 @@ expressRouter.get("/add", (request, response, next) => { //get in url
     });
 });
 expressRouter.post("/add", (request, response, next) => { //get in url
-    let newDepartment = new departmentsSchema({
-        name: request.body.name,
-        manager: 0
-
-
-    });
+    let newDepartment = new departmentsSchema(
+        request.body,
+    );
     newDepartment.save(
         (error) => {
             // console.log("error " + error);
@@ -61,13 +58,24 @@ expressRouter.get("/edit", (request, response, next) => { //get in url
 
 });
 expressRouter.post("/edit", (request, response, next) => { //get in url
-    response.send("edit depts")
-    next();
+    departmentsSchema.updateOne({ _id: request.body._id }, { $set: request.body }).then((data => {
+        response.redirect("/departments/list");
+
+    })).catch((error) => { console.log(error + "") });
 
 });
 expressRouter.post("/delete", (request, response, next) => { //get in url
-    response.send("delete depts")
-    next();
+    departmentsSchema.findByIdAndDelete({
+        _id: request.body._id
+    }).then((data) => {
+        console.log(data);
+        
+        response.redirect("/departments/list");
+    }).catch((error) => {
+        console.log("error " + error);
+
+    });
+
 
 });
 module.exports = expressRouter

@@ -46,7 +46,7 @@ expressRouter.post("/add", (request, response, next) => {
 
         },
         department: request.body.department,
-        courses: request.body.courses
+        courses: request.body.course
 
 
     });
@@ -78,7 +78,11 @@ expressRouter.get("/edit", (request, response, next) => { //get in url
 
 });
 expressRouter.post("/edit", (request, response, next) => {
-    next();
+    studentsSchema.updateOne({ _id: request.body._id }, { $set: request.body }).then((data => {
+        response.redirect("/students/list");
+
+    })).catch((error) => { console.log(error + "") });
+
 
 });
 expressRouter.post("/delete", (request, response, next) => { //get in url

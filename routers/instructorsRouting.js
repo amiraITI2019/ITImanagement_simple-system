@@ -51,7 +51,7 @@ expressRouter.get("/edit", (request, response, next) => { //get in url
     instructorsSchema.findOne({ _id: request.query.id }).then((data) => {
         departmentsSchema.find({}).then((data2) => {
 
-            response.render("instructors/editInstructor.ejs", { instructors: data, departments: data2 });
+            response.render("instructors/editInstructor.ejs", { instructor: data, departments: data2 });
 
         }).catch((error) => { console.log(error + "") });
     }).catch((error) => { console.log(error + "") });
@@ -59,11 +59,14 @@ expressRouter.get("/edit", (request, response, next) => { //get in url
 
 });
 expressRouter.post("/edit", (request, response, next) => { //get in url
-    response.redirect("/instructors/list")
+    instructorsSchema.updateOne({ _id: request.body._id }, { $set: request.body }).then((data => {
+        response.redirect("/instructors/list")
+
+    })).catch((error) => { console.log(error + "") });
 
 });
-expressRouter.post("/delete/:id", (request, response, next) => { //get in url
-    instructorsSchema.findByIdAndDelete(request.params.id).then((data) => {
+expressRouter.post("/delete", (request, response, next) => { //get in url
+    instructorsSchema.findByIdAndDelete({_id:request.body._id}).then((data) => {
         response.redirect("/instructors/list");
 
     }).catch((error) => {

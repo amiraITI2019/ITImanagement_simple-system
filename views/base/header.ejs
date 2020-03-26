@@ -27,7 +27,8 @@
             color: white
         }
         
-        .nav-link:hover {
+        .nav-link:hover,
+        #home:hover {
             color: yellowgreen;
         }
         
@@ -43,6 +44,10 @@
         h1 {
             text-align: center;
         }
+        
+        #home {
+            color: white
+        }
     </style>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 </head>
@@ -54,6 +59,9 @@
 
             <div class="nav-item">
                 <img class="logo" src="../images/logo.png" alt="ITI Logo">
+            </div>
+            <div class="nav-item">
+                <a class="dropdown-item" id="home" href=" \home">Home</a>
             </div>
 
             <div class="nav-item dropdown">
