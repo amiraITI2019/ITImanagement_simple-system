@@ -26,7 +26,8 @@
                             <%= instructor["department"]["name"]%>
                         </td>
                         <td>
-                            <button onClick="edit(<%= instructor['_id'] %>)">edit</button>
+                            <a type="submit" href="edit?id=<%= instructor['_id']%>" class="btn btn-primary">edit</a>
+
                         </td>
                         <td>
                             <button onClick="remove(<%= instructor['_id'] %>)">delete</button>
@@ -41,10 +42,6 @@
 
     </div>
     <script>
-        function edit(id) {
-            //$ajaxCode 
-        }
-
         function remove(id) {
             //$ajaxCode
             $.ajax({

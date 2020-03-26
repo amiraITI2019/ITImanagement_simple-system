@@ -47,13 +47,19 @@ expressRouter.post("/add", (request, response, next) => { //get in url
 
 });
 expressRouter.get("/edit", (request, response, next) => { //get in url
-    response.send("edit instructor view")
-    next();
+
+    instructorsSchema.findOne({ _id: request.query.id }).then((data) => {
+        departmentsSchema.find({}).then((data2) => {
+
+            response.render("editInstructor.ejs", { instructors: data, departments: data2 });
+
+        }).catch((error) => { console.log(error + "") });
+    }).catch((error) => { console.log(error + "") });
+
 
 });
 expressRouter.post("/edit", (request, response, next) => { //get in url
-    response.send("edit instructor")
-    next();
+    response.redirect("/instructors/list")
 
 });
 expressRouter.post("/delete/:id", (request, response, next) => { //get in url
